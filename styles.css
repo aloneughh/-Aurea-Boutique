@@ -1,0 +1,614 @@
+:root {
+  --bg: #fff8f3;
+  --surface: rgba(255, 250, 247, 0.84);
+  --surface-strong: #fff9f5;
+  --text: #2f1f23;
+  --muted: #7c6570;
+  --accent: #b85c55;
+  --accent-dark: #7f2f2a;
+  --accent-soft: #f7d9cc;
+  --gold: #d9b16c;
+  --border: rgba(126, 72, 73, 0.16);
+  --shadow: 0 24px 60px rgba(129, 74, 66, 0.18);
+  --radius-lg: 32px;
+  --radius-md: 24px;
+  --radius-sm: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Cairo", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top right, rgba(216, 177, 108, 0.26), transparent 26%),
+    radial-gradient(circle at 12% 25%, rgba(184, 92, 85, 0.15), transparent 24%),
+    linear-gradient(180deg, #fffaf6 0%, #fff3ea 45%, #fff8f5 100%);
+  min-height: 100vh;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: auto;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(18px);
+}
+
+body::before {
+  top: -100px;
+  left: -60px;
+  background: rgba(184, 92, 85, 0.12);
+}
+
+body::after {
+  right: -120px;
+  bottom: 10%;
+  background: rgba(217, 177, 108, 0.2);
+}
+
+.page-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 24px auto 48px;
+}
+
+.hero {
+  background: linear-gradient(135deg, rgba(255, 249, 245, 0.92), rgba(255, 241, 233, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 40px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.22), transparent 40%),
+    radial-gradient(circle at left bottom, rgba(184, 92, 85, 0.08), transparent 30%);
+  pointer-events: none;
+}
+
+.topbar,
+.hero-grid,
+.features,
+.products-section,
+.order-section {
+  position: relative;
+  z-index: 1;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26px 32px 10px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-mark {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--accent), #d38a76);
+  color: #fff;
+  font-family: "Changa", sans-serif;
+  font-size: 1.45rem;
+  box-shadow: 0 14px 32px rgba(184, 92, 85, 0.28);
+}
+
+.brand-copy {
+  display: grid;
+  gap: 2px;
+}
+
+.brand-copy strong {
+  font-family: "Changa", sans-serif;
+  font-size: 1.15rem;
+}
+
+.brand-copy small,
+.topbar-links a,
+.hero-copy p,
+.highlights,
+.features p,
+.product-copy p,
+.product-meta span,
+.order-summary p,
+.notice,
+.order-form label,
+textarea,
+input {
+  color: var(--muted);
+}
+
+.topbar-links {
+  display: flex;
+  gap: 20px;
+}
+
+.topbar-links a {
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+  gap: 28px;
+  padding: 36px 32px 42px;
+}
+
+.hero-copy h1,
+.section-heading h2,
+.product-copy h3,
+.order-summary h3 {
+  font-family: "Changa", sans-serif;
+  color: var(--text);
+  margin: 0;
+}
+
+.eyebrow,
+.section-heading span,
+.summary-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  color: var(--accent);
+  background: rgba(184, 92, 85, 0.1);
+  padding: 8px 14px;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.hero-copy h1 {
+  margin-top: 16px;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: 1.18;
+}
+
+.hero-copy p {
+  margin: 18px 0 0;
+  font-size: 1.08rem;
+  line-height: 1.9;
+  max-width: 54ch;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.primary-btn,
+.secondary-btn,
+.product-btn {
+  border: 0;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+}
+
+.primary-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 54px;
+  padding: 0 26px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  color: #fff;
+  box-shadow: 0 20px 34px rgba(184, 92, 85, 0.26);
+}
+
+.secondary-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 54px;
+  padding: 0 26px;
+  color: var(--accent-dark);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(184, 92, 85, 0.16);
+}
+
+.primary-btn:hover,
+.secondary-btn:hover,
+.product-btn:hover {
+  transform: translateY(-2px);
+}
+
+.highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0;
+  margin: 24px 0 0;
+  list-style: none;
+}
+
+.highlights li {
+  background: rgba(255, 255, 255, 0.76);
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(184, 92, 85, 0.1);
+  font-weight: 700;
+}
+
+.hero-card {
+  align-self: end;
+  padding: 28px;
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(150deg, rgba(127, 47, 42, 0.95), rgba(184, 92, 85, 0.88)),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.06), transparent 60%);
+  color: #fff5ee;
+  box-shadow: 0 24px 44px rgba(125, 52, 47, 0.28);
+  min-height: 330px;
+  display: grid;
+  gap: 18px;
+}
+
+.hero-badge {
+  width: fit-content;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  font-weight: 700;
+}
+
+.hero-product {
+  display: grid;
+  gap: 6px;
+}
+
+.hero-product span {
+  font-size: 1rem;
+}
+
+.hero-product strong,
+.order-summary strong {
+  font-size: 1.7rem;
+  color: #fff;
+}
+
+.hero-swatches {
+  display: flex;
+  gap: 10px;
+}
+
+.hero-swatches span {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.34);
+}
+
+.hero-swatches span:nth-child(1) {
+  background: #f6d0b1;
+}
+
+.hero-swatches span:nth-child(2) {
+  background: #efd9ab;
+}
+
+.hero-swatches span:nth-child(3) {
+  background: #f8f4ea;
+}
+
+.features,
+.products-section,
+.order-section {
+  margin-top: 32px;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.features article,
+.product-card,
+.order-summary,
+.order-form {
+  background: var(--surface);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: var(--shadow);
+}
+
+.features article {
+  padding: 24px;
+  border-radius: var(--radius-md);
+}
+
+.features strong {
+  display: block;
+  margin-bottom: 10px;
+  font-family: "Changa", sans-serif;
+  font-size: 1.18rem;
+}
+
+.section-heading {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.section-heading h2 {
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.product-card {
+  display: grid;
+  gap: 18px;
+  padding: 18px;
+  border-radius: var(--radius-md);
+}
+
+.product-visual {
+  min-height: 200px;
+  border-radius: 24px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 34% 30%, rgba(255, 255, 255, 0.92), transparent 12%),
+    radial-gradient(circle at 52% 48%, rgba(255, 247, 221, 0.8), transparent 18%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(0, 0, 0, 0.05));
+}
+
+.product-visual.pearl {
+  background-image: url("Gold-Look Twin Rings.jpg.jpeg");
+}
+
+.product-visual.rose {
+  background-image: url("Gold-Look Twin Rings2.jpeg");
+}
+
+.product-visual.teardrop {
+  background-image: url("ring3.jpeg.jpg");
+}
+
+.product-visual.loop {
+  background-image: url("ring4.jpeg.jpg");
+}
+
+.product-visual.snake {
+  background-image: url("ring5.jpeg.jpg");
+}
+
+.product-visual.gold-plated-1 {
+  background-image: url("gold-plated-ring-1.jpg");
+}
+
+.product-visual.gold-plated-2 {
+  background-image: url("gold-plated-ring-2.jpg");
+}
+
+.product-copy {
+  display: grid;
+  gap: 10px;
+}
+
+.product-copy h3 {
+  font-size: 1.28rem;
+}
+
+.product-copy p {
+  margin: 0;
+  line-height: 1.8;
+}
+
+.product-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.product-meta strong {
+  color: var(--accent-dark);
+  font-size: 1.1rem;
+}
+
+.product-btn {
+  min-height: 48px;
+  background: rgba(184, 92, 85, 0.1);
+  color: var(--accent-dark);
+}
+
+.product-card.active {
+  outline: 2px solid rgba(184, 92, 85, 0.28);
+  transform: translateY(-4px);
+}
+
+.order-layout {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 20px;
+}
+
+.order-summary,
+.order-form {
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+.order-summary {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  background:
+    linear-gradient(180deg, rgba(127, 47, 42, 0.96), rgba(184, 92, 85, 0.88)),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.08), transparent 60%);
+  color: #fff7f2;
+}
+
+.order-summary p,
+.order-summary .summary-label {
+  color: rgba(255, 245, 239, 0.9);
+}
+
+.order-summary .summary-label {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.notice {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  line-height: 1.8;
+}
+
+.notice.ready {
+  background: rgba(217, 177, 108, 0.15);
+}
+
+.notice.error {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.order-form {
+  display: grid;
+  gap: 16px;
+}
+
+.order-form label {
+  display: grid;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.order-form input,
+.order-form textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 14px 16px;
+  font: inherit;
+  background: rgba(255, 255, 255, 0.85);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.order-form input:focus,
+.order-form textarea:focus {
+  outline: none;
+  border-color: rgba(184, 92, 85, 0.55);
+  box-shadow: 0 0 0 4px rgba(184, 92, 85, 0.12);
+}
+
+.inline-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.submit-btn {
+  width: 100%;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: #fff;
+}
+
+@media (max-width: 1024px) {
+  .hero-grid,
+  .order-layout,
+  .features,
+  .products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .order-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .order-summary {
+    order: 1;
+  }
+}
+
+@media (max-width: 720px) {
+  .page-shell {
+    width: min(100% - 20px, 100%);
+    margin-top: 10px;
+  }
+
+  .topbar,
+  .hero-grid {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .hero-grid,
+  .features,
+  .products-grid,
+  .inline-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    border-radius: 28px;
+  }
+
+  .features article,
+  .product-card,
+  .order-summary,
+  .order-form {
+    border-radius: 24px;
+  }
+
+  .hero-copy h1 {
+    font-size: 2.2rem;
+  }
+}
