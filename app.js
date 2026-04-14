@@ -1,6 +1,6 @@
 const defaultConfig = {
   orderEmail: "your-email@example.com",
-  formServiceBase: "https://formsubmit.co",
+  web3formsKey: "",
 };
 
 const storeConfig = Object.assign({}, defaultConfig, window.STORE_CONFIG || {});
@@ -202,10 +202,12 @@ function selectProduct(card, options = {}) {
 
 function configureForm() {
   const trimmedEmail = (storeConfig.orderEmail || "").trim();
+  const accessKey = (storeConfig.web3formsKey || "").trim();
   const isConfigured =
     trimmedEmail.length > 3 &&
     trimmedEmail.includes("@") &&
-    trimmedEmail !== defaultConfig.orderEmail;
+    trimmedEmail !== defaultConfig.orderEmail &&
+    accessKey.length > 0;
 
   if (!isConfigured) {
     configNotice.textContent =
@@ -219,10 +221,43 @@ function configureForm() {
     return;
   }
 
-  form.action = `${storeConfig.formServiceBase}/${encodeURIComponent(trimmedEmail)}`;
   configNotice.textContent = "الموقع جاهز لاستقبال طلباتك الآن.";
   configNotice.style.display = "block";
   configNotice.classList.add("ready");
+
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    formData.append("access_key", accessKey);
+
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = "جاري الإرسال...";
+    submitBtn.disabled = true;
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("تم الإرسال بنجاح! تم استلام طلبك.");
+        form.reset();
+      } else {
+        alert("حدث خطأ: " + data.message);
+      }
+    } catch (error) {
+      alert("حدث خطأ ما. يرجى المحاولة مرة أخرى.");
+    } finally {
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }
+  });
 }
 
 productCards.forEach((card) => {
